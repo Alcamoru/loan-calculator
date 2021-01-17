@@ -11,76 +11,87 @@ class LoanCalcTest(StageTest):
     def generate(self):
         return [
             TestCase(
-                stdin='1000\nm\n200',
-                attach=(5, 'months'),
+                stdin='a\n1000000\n60\n10',
+                attach=21248,
             ),
             TestCase(
-                stdin='1000\nm\n150',
-                attach=(7, 'months'),
+                stdin='a\n1000000\n8\n9.8',
+                attach=129638,
             ),
             TestCase(
-                stdin='1000\nm\n1000',
-                attach=(1, 'month'),
+                stdin='a\n3000000\n302\n11.2',
+                attach=29803,
             ),
             TestCase(
-                stdin='1000\np\n10',
-                attach=100,
+                stdin='n\n500000\n23000\n7.8',
+                attach=[2, 0],
             ),
             TestCase(
-                stdin='1000\np\n9',
-                attach=['112', '104'],
+                stdin='n\n700000\n26000\n9.1',
+                attach=[2, 7],
+            ),
+            TestCase(
+                stdin='p\n8721.8\n120\n5.6',
+                attach=(800000,),
+            ),
+            TestCase(
+                stdin='p\n6898.02\n240\n3.4',
+                attach=(1200001,),
             ),
         ]
 
     def check(self, reply, attach):
-        reply = reply.lower()
+        numbers = re.findall(r'[-+]?(\d*\.\d+|\d+)', reply)
+        if len(numbers) == 0:
+            return CheckResult.wrong(
+                'No numbers in the answer',
+            )
+
         if isinstance(attach, tuple):
-            a, b = attach
-            if a == 1:
-                if '1 months' in reply.lower():
-                    output = '{0} should be in the output, but you output {1}'
-                    return CheckResult.wrong(
-                        output.format('1 month', reply),
-                    )
+            for i in numbers:
+                if abs(attach[0] - float(i)) < 2:
+                    return CheckResult.correct()
+            output = 'Numbers in your answer: ' + ' '.join(numbers)
+            output += 'But correct principal is {0}'.format(attach)
+            return CheckResult.wrong(output)
 
-            if str(a) not in reply or b not in reply.lower():
+        if isinstance(attach, list):
+            # to exclude answers like 'it takes 2.01 years'
+            # but 'it takes 2.0 years' let it be OK.
+            epsilon = 0.00001
+            numbers = [
+                int(float(x)) for x in numbers
+                if abs(int(float(x)) - float(x)) < epsilon
+            ]
+            if attach[1] == 0:
+                if 'year' in reply.lower() and attach[0] in numbers:
+                    return CheckResult.correct()
+
+                output = 'Correct result: {0} years, but you output "{1}"'
+                return CheckResult.wrong(
+                    output.format(attach[0], reply),
+                )
+            else:
+                if attach[0] in numbers and 'year' in reply.lower():
+                    if attach[1] in numbers and 'month' in reply.lower():
+                        return CheckResult.correct()
+
                 output = (
-                    '"{0} {1}" should be in the output, but you output {2}'
+                    'Correct result: {0} years {1} months, '
+                    'but you output "{2}"'
                 )
                 return CheckResult.wrong(
-                    output.format(a, b, reply),
+                    output.format(attach[0], attach[1], reply),
                 )
 
-        elif isinstance(attach, list):
-            if attach[0] not in reply or attach[1] not in reply:
-                numbers = re.findall(r'[-+]?(\d*\.\d+|\d+)', reply)
-                if len(numbers) == 0:
-                    output = (
-                        'Correct monthly payment is {0} and last payment is'
-                        ' {1}, but there are no any numbers in your output'
-                        .format(attach[0], attach[1])
-                    )
-                elif len(numbers) == 1:
-                    output = (
-                        'Correct monthly payment is {0} and last payment is'
-                        ' {1}, but there are only {2} in your output'
-                        .format(attach[0], attach[1], numbers[0])
-                    )
-                else:
-                    output = (
-                        'Correct monthly payment is {0} and last payment is'
-                        ' {1}, but there are only {2} {3} in your output'
-                        .format(attach[0], attach[1], numbers[0], numbers[1])
-                    )
-                return CheckResult.wrong(output)
-        else:
-            if str(attach) not in reply:
-                output = (
-                    'Correct monthly payment is {0}. But your output is {1}'
-                )
-                return CheckResult.wrong(
-                    output.format(attach, reply),
-                )
+        if str(attach) not in reply.lower():
+            output = (
+                'Correct annuity payment is {0} but you output numbers: {1}'
+            )
+            figures = ' '.join(numbers)
+            return CheckResult.wrong(
+                output.format(attach, figures),
+            )
 
         return CheckResult.correct()
 

@@ -1,39 +1,6 @@
 type: edu
 custom_name: stage3
 files:
-- name: creditcalc/creditcalc.py
-  visible: true
-  text: |
-    from math import ceil
-
-    first_month = 'Month 1: paid out 250'
-    second_month = 'Month 2: paid out 250'
-    third_month = 'Month 3: paid out 500'
-    final_output = 'The credit has been repaid!'
-
-    # write your code here
-    print("Enter the credit principal:")
-    principal = int(input())
-    print("""What do you want to calculate?
-    type "m" - for the number of months,
-    type "p" - for the monthly payment:""")
-    type_enter = input()
-    if type_enter == "p":
-        print("Enter the number of months:")
-        months = int(input())
-        payment = principal / months
-        if principal % months != 0:
-            payment = int(payment) + 1
-            last_payment = principal - (months - 1) * payment
-            print(f"Your monthly payment = {payment} with last monthly payment = {last_payment}.")
-        else:
-            print(f"Your monthly payment = {payment}")
-    else:
-        print("Enter the monthly payment:")
-        payment = int(input())
-        months = principal / payment
-        print(f"It takes {months} month to repay the credit")
-  learner_created: false
 - name: tests.py
   visible: false
   text: |
@@ -138,6 +105,42 @@ files:
     if __name__ == '__main__':
         LoanCalcTest('creditcalc.creditcalc').run_tests()
   learner_created: false
+- name: creditcalc/creditcalc.py
+  visible: true
+  text: |
+    from math import ceil
+
+    first_month = 'Month 1: paid out 250'
+    second_month = 'Month 2: paid out 250'
+    third_month = 'Month 3: paid out 500'
+    final_output = 'The credit has been repaid!'
+
+    # write your code here
+    print("Enter the credit principal:")
+    principal = int(input())
+    print("""What do you want to calculate?
+    type "m" - for the number of months,
+    type "p" - for the monthly payment:""")
+    type_enter = input()
+    if type_enter == "p":
+        print("Enter the number of months:")
+        months = int(input())
+        payment = principal / months
+        if principal % months != 0:
+            payment = int(payment) + 1
+            last_payment = principal - (months - 1) * payment
+            print(f"Your monthly payment = {payment} with last monthly payment = {last_payment}.")
+        else:
+            print(f"Your monthly payment = {payment}")
+    else:
+        print("Enter the monthly payment:")
+        payment = int(input())
+        months = principal / payment
+        print(f"It takes {months} month to repay the credit")
+  learner_created: false
 feedback_link: https://hyperskill.org/projects/90/stages/502/implement#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Sun, 17 Jan 2021 15:22:01 UTC
 record: -1
