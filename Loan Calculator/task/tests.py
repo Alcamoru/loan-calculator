@@ -1,6 +1,7 @@
 from hstest.stage_test import StageTest
 from hstest.test_case import TestCase
 from hstest.check_result import CheckResult
+import re
 
 CheckResult.correct = lambda: CheckResult(True, '')
 CheckResult.wrong = lambda feedback: CheckResult(False, feedback)
@@ -8,25 +9,78 @@ CheckResult.wrong = lambda feedback: CheckResult(False, feedback)
 
 class LoanCalcTest(StageTest):
     def generate(self):
-        return [TestCase()]
-
-    def check(self, reply, attach):
-        print_strs = [
-            'Loan principal: 1000',
-            'Month 1: repaid 250',
-            'Month 2: repaid 250',
-            'Month 3: repaid 500',
-            'The loan has been repaid!',
+        return [
+            TestCase(
+                stdin='1000\nm\n200',
+                attach=(5, 'months'),
+            ),
+            TestCase(
+                stdin='1000\nm\n150',
+                attach=(7, 'months'),
+            ),
+            TestCase(
+                stdin='1000\nm\n1000',
+                attach=(1, 'month'),
+            ),
+            TestCase(
+                stdin='1000\np\n10',
+                attach=100,
+            ),
+            TestCase(
+                stdin='1000\np\n9',
+                attach=['112', '104'],
+            ),
         ]
 
-        for print_str in print_strs:
-            if print_str not in reply:
+    def check(self, reply, attach):
+        reply = reply.lower()
+        if isinstance(attach, tuple):
+            a, b = attach
+            if a == 1:
+                if '1 months' in reply.lower():
+                    output = '{0} should be in the output, but you output {1}'
+                    return CheckResult.wrong(
+                        output.format('1 month', reply),
+                    )
+
+            if str(a) not in reply or b not in reply.lower():
+                output = (
+                    '"{0} {1}" should be in the output, but you output {2}'
+                )
                 return CheckResult.wrong(
-                    'You forgot to output string "{0}"'.format(print_str),
+                    output.format(a, b, reply),
                 )
 
-        if not '\n'.join(print_strs) in reply:
-            return CheckResult.wrong('You output strings in the wrong order')
+        elif isinstance(attach, list):
+            if attach[0] not in reply or attach[1] not in reply:
+                numbers = re.findall(r'[-+]?(\d*\.\d+|\d+)', reply)
+                if len(numbers) == 0:
+                    output = (
+                        'Correct monthly payment is {0} and last payment is'
+                        ' {1}, but there are no any numbers in your output'
+                        .format(attach[0], attach[1])
+                    )
+                elif len(numbers) == 1:
+                    output = (
+                        'Correct monthly payment is {0} and last payment is'
+                        ' {1}, but there are only {2} in your output'
+                        .format(attach[0], attach[1], numbers[0])
+                    )
+                else:
+                    output = (
+                        'Correct monthly payment is {0} and last payment is'
+                        ' {1}, but there are only {2} {3} in your output'
+                        .format(attach[0], attach[1], numbers[0], numbers[1])
+                    )
+                return CheckResult.wrong(output)
+        else:
+            if str(attach) not in reply:
+                output = (
+                    'Correct monthly payment is {0}. But your output is {1}'
+                )
+                return CheckResult.wrong(
+                    output.format(attach, reply),
+                )
 
         return CheckResult.correct()
 
