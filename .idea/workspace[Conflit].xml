@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="1972f8d1-68c8-483b-aa8c-3ff51b95f684" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/frameworkLessonHistory/storage.storageData" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/frameworkLessonHistory/storage.storageData" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/frameworkLessonHistory/storage.storageRecordIndex" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/frameworkLessonHistory/storage.storageRecordIndex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Loan Calculator/Annuity payment/task-info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Loan Calculator/Annuity payment/task-info.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Loan Calculator/Differentiate payment/task-info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Loan Calculator/Differentiate payment/task-info.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Loan Calculator/Differentiate payment/task-remote-info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Loan Calculator/Differentiate payment/task-remote-info.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Loan Calculator/lesson-info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Loan Calculator/lesson-info.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Loan Calculator/task/creditcalc/creditcalc.py" beforeDir="false" afterPath="$PROJECT_DIR$/Loan Calculator/task/creditcalc/creditcalc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Loan Calculator/task/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/Loan Calculator/task/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/course-info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/course-info.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/course-remote-info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/course-remote-info.yaml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1nBlmNUFZFWm1xUBQXL0vFmc5pi" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1972f8d1-68c8-483b-aa8c-3ff51b95f684" name="Default Changelist" comment="" />
+      <created>1610871522359</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1610871522359</updated>
+      <workItem from="1610871540963" duration="1412000" />
+      <workItem from="1610890418671" duration="4257000" />
+      <workItem from="1610898026048" duration="291000" />
+      <workItem from="1610903023229" duration="8000" />
+      <workItem from="1611082446912" duration="613000" />
+      <workItem from="1611388810871" duration="2624000" />
+      <workItem from="1611410449190" duration="3436000" />
+      <workItem from="1611473399880" duration="5074000" />
+      <workItem from="1611762432064" duration="159000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Loan_Calculator$Loan_Calculator_Beginning.coverage" NAME="Loan Calculator/Beginning Coverage Results" MODIFIED="1610871778334" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/Loan_Calculator$Loan_Calculator_Dreamworld.coverage" NAME="Loan Calculator/Dreamworld Coverage Results" MODIFIED="1610872642498" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/Loan_Calculator$Loan_Calculator_Annuity_payment.coverage" NAME="Loan Calculator/Annuity payment Coverage Results" MODIFIED="1610896921827" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/Loan_Calculator$Loan_Calculator_Differentiate_payment.coverage" NAME="Loan Calculator/Differentiate payment Coverage Results" MODIFIED="1611476261918" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+  </component>
+</project>
