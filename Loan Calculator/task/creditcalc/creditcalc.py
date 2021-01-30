@@ -1,93 +1,62 @@
 import math
-import argparse
 
-parser = argparse.ArgumentParser("This program is a Loan calculator")
-parser.add_argument("-t", "--type")
-parser.add_argument("--principal")
-parser.add_argument("--periods")
-parser.add_argument("--interest")
-parser.add_argument("--payment")
+print("""What do you want to calculate?
+type "n" for number of monthly payments,
+type "a" for annuity monthly payment amount,
+type "p" for loan principal:""")
 
-args = parser.parse_args()
+action = input()
 
+if action == "n":
+    print("Enter the loan principal:")
+    loan_amount = int(input())
+    print("Enter the monthly payment:")
+    monthly_payment = float(input())
+    print("Enter the loan interest")
+    loan_interest = float(input())
 
-def verify_parameters(type_of_loan_arg, loan_amount_arg, monthly_payment_arg, loan_interest_arg, n_months_arg):
-    if type_of_loan_arg != "annuity" or type_of_loan_arg != "diff" or not  type_of_loan_arg:
-        return False
-    elif type_of_loan_arg == "diff" and monthly_payment_arg:
-        return False
-    elif not loan_interest_arg:
-        return False
-    required_args = [type_of_loan_arg, loan_amount_arg, monthly_payment_arg, loan_interest_arg, n_months_arg]
-    a = 0
-    for i in required_args:
-        if i is not None:
-            a += 1
-    print(a)
-    if a < 4:
-        return False
+    interest_rate = loan_interest / (12 * 100)
 
-    return True
+    n_months = math.ceil(math.log(monthly_payment / (monthly_payment - interest_rate
+                                                     * loan_amount),
+                                  1 + interest_rate))
 
+    if n_months == 1:
+        print("It will take 1 month to repay this loan!")
+    elif n_months < 12:
+        print(f"It will take {n_months} months to repay this loan!")
+    elif n_months % 12 == 0:
+        print(f"It will take {n_months // 12} years to repay this loan!")
+    else:
+        print(f"It will take {n_months // 12} years and "
+              f"{n_months % 12} months to repay this loan!")
 
-type_of_loan = args.type
-loan_amount = args.principal
-monthly_payment = args.payment
-loan_interest = args.interest
-n_months = args.periods
+elif action == "a":
+    print("Enter the loan principal:")
+    loan_amount = int(input())
+    print("Enter the number of periods:")
+    n_months = int(input())
+    print("Enter the loan interest:")
+    loan_interest = float(input())
 
-if verify_parameters(type_of_loan, loan_amount, monthly_payment, loan_interest, n_months):
+    interest_rate = loan_interest / (12 * 100)
 
-    missing_parameter = ""
+    monthly_payment = math.ceil(loan_amount * ((interest_rate * (interest_rate + 1) ** n_months)
+                                               / ((1 + interest_rate) ** n_months - 1)))
 
-    if not loan_amount:
-        missing_parameter = "loan amount"
-    elif not monthly_payment:
-        missing_parameter = "monthly payment"
-    elif not n_months:
-        missing_parameter = "n months"
+    print(f"Your monthly payment = {monthly_payment}!")
 
-    if type_of_loan == "annuity":
+elif action == "p":
+    print("Enter the annuity payment:")
+    monthly_payment = float(input())
+    print("Enter the number of periods:")
+    n_months = int(input())
+    print("Enter the loan interest:")
+    loan_interest = float(input())
 
-        if missing_parameter == "n months":
+    interest_rate = loan_interest / (12 * 100)
 
-            interest_rate = loan_interest / (12 * 100)
-            n_months = round(math.ceil(math.log(monthly_payment / (monthly_payment - interest_rate
-                                                             * loan_amount),
-                                          1 + interest_rate)))
+    loan_amount = monthly_payment / ((interest_rate * (1 + interest_rate) ** n_months)
+                                     / ((1 + interest_rate) ** n_months - 1))
 
-            if n_months == 1:
-                print("It will take 1 month to repay this loan!")
-            elif n_months < 12:
-                print(f"It will take {n_months} months to repay this loan!")
-            elif n_months % 12 == 0:
-                print(f"It will take {n_months // 12} years to repay this loan!")
-            else:
-                print(f"It will take {n_months // 12} years and "
-                      f"{n_months % 12} months to repay this loan!")
-
-        elif missing_parameter == "monthly payment":
-
-            interest_rate = loan_interest / (12 * 100)
-            monthly_payment = math.ceil(loan_amount * ((interest_rate * (interest_rate + 1) ** n_months)
-                                                       / ((1 + interest_rate) ** n_months - 1)))
-
-            print(f"Your monthly payment = {round(monthly_payment)}!")
-
-        elif missing_parameter == "loan amount":
-
-            interest_rate = loan_interest / (12 * 100)
-
-            loan_amount = monthly_payment / ((interest_rate * (1 + interest_rate) ** n_months)
-                                             / ((1 + interest_rate) ** n_months - 1))
-
-            print(f"Your loan principal = {round(loan_amount)}!")
-
-    elif type_of_loan == "diff":
-
-        if not args.payment:
-
-            interest_rate = loan_interest / (12 * 100)
-
-else:
-    print("Incorrect parameters")
+    print(f"Your loan principal = {loan_amount}!")
