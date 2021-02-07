@@ -104,8 +104,7 @@ if verify_parameters(type_of_loan, loan_amount, monthly_payment, loan_interest, 
             overpayment = 0
             for i in range(0, n_months):
                 i += 1
-                payment = math.ceil(loan_amount / n_months + interest_rate * (loan_amount - ((loan_amount * (i - 1)) /
-                                                                                              n_months)))
+                payment = math.ceil(loan_amount / n_months + interest_rate * (loan_amount - ((loan_amount * (i - 1)) / n_months)))
                 print(f"Month {i}: payment is {payment}")
                 overpayment += payment
             overpayment -= loan_amount
